@@ -172,3 +172,13 @@
 .content-button .fa {
   margin-right: 10px;
 }
+
+.link {
+  color: #169dd5; /* Twój naturalny kolor */
+  text-decoration: none; /* Opcjonalnie - usuwa podkreślenie */
+}
+
+.link:hover {
+  color: #DC143C; /* Twój kolor po najechaniu */
+  text-decoration: none; /* Opcjonalnie */
+}
