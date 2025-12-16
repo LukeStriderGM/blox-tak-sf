@@ -173,6 +173,13 @@
   margin-right: 10px;
 }
 
+/* Klasa zwężająca przycisk i centrująca go */
+.w-90 {
+  width: 90% !important; /* Nadpisuje 100% */
+  margin-left: auto;     /* Centruje przycisk */
+  margin-right: auto;    /* Centruje przycisk */
+}
+
 .link {
   color: #169dd5; /* Twój naturalny kolor */
   text-decoration: none; /* Opcjonalnie - usuwa podkreślenie */
