@@ -1,0 +1,633 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script>function neighbourhoodHighlight(params) {
+  // console.log("in nieghbourhoodhighlight");
+  allNodes = nodes.get({ returnType: "Object" });
+  // originalNodes = JSON.parse(JSON.stringify(allNodes));
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    highlightActive = true;
+    var i, j;
+    var selectedNode = params.nodes[0];
+    var degrees = 2;
+
+    // mark all nodes as hard to read.
+    for (let nodeId in allNodes) {
+      // nodeColors[nodeId] = allNodes[nodeId].color;
+      allNodes[nodeId].color = "rgba(200,200,200,0.5)";
+      if (allNodes[nodeId].hiddenLabel === undefined) {
+        allNodes[nodeId].hiddenLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+    var connectedNodes = network.getConnectedNodes(selectedNode);
+    var allConnectedNodes = [];
+
+    // get the second degree nodes
+    for (i = 1; i < degrees; i++) {
+      for (j = 0; j < connectedNodes.length; j++) {
+        allConnectedNodes = allConnectedNodes.concat(
+          network.getConnectedNodes(connectedNodes[j])
+        );
+      }
+    }
+
+    // all second degree nodes get a different color and their label back
+    for (i = 0; i < allConnectedNodes.length; i++) {
+      // allNodes[allConnectedNodes[i]].color = "pink";
+      allNodes[allConnectedNodes[i]].color = "rgba(150,150,150,0.75)";
+      if (allNodes[allConnectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[allConnectedNodes[i]].label =
+          allNodes[allConnectedNodes[i]].hiddenLabel;
+        allNodes[allConnectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // all first degree nodes get their own color and their label back
+    for (i = 0; i < connectedNodes.length; i++) {
+      // allNodes[connectedNodes[i]].color = undefined;
+      allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+      if (allNodes[connectedNodes[i]].hiddenLabel !== undefined) {
+        allNodes[connectedNodes[i]].label =
+          allNodes[connectedNodes[i]].hiddenLabel;
+        allNodes[connectedNodes[i]].hiddenLabel = undefined;
+      }
+    }
+
+    // the main node gets its own color and its label back.
+    // allNodes[selectedNode].color = undefined;
+    allNodes[selectedNode].color = nodeColors[selectedNode];
+    if (allNodes[selectedNode].hiddenLabel !== undefined) {
+      allNodes[selectedNode].label = allNodes[selectedNode].hiddenLabel;
+      allNodes[selectedNode].hiddenLabel = undefined;
+    }
+  } else if (highlightActive === true) {
+    // console.log("highlightActive was true");
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      // allNodes[nodeId].color = "purple";
+      allNodes[nodeId].color = nodeColors[nodeId];
+      // delete allNodes[nodeId].color;
+      if (allNodes[nodeId].hiddenLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].hiddenLabel;
+        allNodes[nodeId].hiddenLabel = undefined;
+      }
+    }
+    highlightActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    // console.log("Nothing was selected");
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        // console.log(allNodes[nodeId]);
+        // allNodes[nodeId].color = {};
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function filterHighlight(params) {
+  allNodes = nodes.get({ returnType: "Object" });
+  // if something is selected:
+  if (params.nodes.length > 0) {
+    filterActive = true;
+    let selectedNodes = params.nodes;
+
+    // hiding all nodes and saving the label
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = true;
+      if (allNodes[nodeId].savedLabel === undefined) {
+        allNodes[nodeId].savedLabel = allNodes[nodeId].label;
+        allNodes[nodeId].label = undefined;
+      }
+    }
+
+    for (let i=0; i < selectedNodes.length; i++) {
+      allNodes[selectedNodes[i]].hidden = false;
+      if (allNodes[selectedNodes[i]].savedLabel !== undefined) {
+        allNodes[selectedNodes[i]].label = allNodes[selectedNodes[i]].savedLabel;
+        allNodes[selectedNodes[i]].savedLabel = undefined;
+      }
+    }
+
+  } else if (filterActive === true) {
+    // reset all nodes
+    for (let nodeId in allNodes) {
+      allNodes[nodeId].hidden = false;
+      if (allNodes[nodeId].savedLabel !== undefined) {
+        allNodes[nodeId].label = allNodes[nodeId].savedLabel;
+        allNodes[nodeId].savedLabel = undefined;
+      }
+    }
+    filterActive = false;
+  }
+
+  // transform the object into an array
+  var updateArray = [];
+  if (params.nodes.length > 0) {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  } else {
+    for (let nodeId in allNodes) {
+      if (allNodes.hasOwnProperty(nodeId)) {
+        updateArray.push(allNodes[nodeId]);
+      }
+    }
+    nodes.update(updateArray);
+  }
+}
+
+function selectNode(nodes) {
+  network.selectNodes(nodes);
+  neighbourhoodHighlight({ nodes: nodes });
+  return nodes;
+}
+
+function selectNodes(nodes) {
+  network.selectNodes(nodes);
+  filterHighlight({nodes: nodes});
+  return nodes;
+}
+
+function highlightFilter(filter) {
+  let selectedNodes = []
+  let selectedProp = filter['property']
+  if (filter['item'] === 'node') {
+    let allNodes = nodes.get({ returnType: "Object" });
+    for (let nodeId in allNodes) {
+      if (allNodes[nodeId][selectedProp] && filter['value'].includes((allNodes[nodeId][selectedProp]).toString())) {
+        selectedNodes.push(nodeId)
+      }
+    }
+  }
+  else if (filter['item'] === 'edge'){
+    let allEdges = edges.get({returnType: 'object'});
+    // check if the selected property exists for selected edge and select the nodes connected to the edge
+    for (let edge in allEdges) {
+      if (allEdges[edge][selectedProp] && filter['value'].includes((allEdges[edge][selectedProp]).toString())) {
+        selectedNodes.push(allEdges[edge]['from'])
+        selectedNodes.push(allEdges[edge]['to'])
+      }
+    }
+  }
+  selectNodes(selectedNodes)
+}</script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+            
+            
+            
+            
+            
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/css/tom-select.min.css" integrity="sha512-43fHB3GLgZfz8QXl1RPQ8O66oIgv3po9cJ5erMt1c4QISq9dYb195T3vr5ImnJPXuVroKcGBPXBFKETW8jrPNQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/tom-select/2.0.0-rc.4/js/tom-select.complete.js" integrity="sha512-jeF9CfnvzDiw9G9xiksVjxR2lib44Gnovvkv+3CgCG6NXCD4gqlA5nDAVW5WjpA+i+/zKsUWV5xNEbW1X/HH0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 850px;
+                 background-color: #2d3436;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    
+<style>
+    /* 1. Ukrywamy wszystkie panele sterowania pyvis/vis.js */
+    div.vis-configuration-wrapper, 
+    div.vis-config-scontainer, 
+    div.vis-manipulation, 
+    div.vis-edit-mode, 
+    div.vis-close, 
+    div.vis-navigation,
+    .card-body, 
+    .card-header { 
+        display: none !important; 
+    }
+
+    /* 2. WYMUSZAMY widoczność samego płótna grafu na pełnym ekranie */
+    #mynetwork { 
+        display: block !important; 
+        position: fixed !important; 
+        top: 0; 
+        left: 0; 
+        width: 100vw !important; 
+        height: 100vh !important; 
+        z-index: 99999; /* Musi być na samej górze */
+        visibility: visible !important;
+        opacity: 1 !important;
+        background-color: #161c2a; /* Tło strony */
+        border: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Blokujemy scrollowanie tła */
+    body { overflow: hidden !important; }
+</style>
+
+</head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+                <div id="select-menu" class="card-header">
+                    <div class="row no-gutters">
+                        <div class="col-10 pb-2">
+                            <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="selectNode([value]);"
+                            id="select-node"
+                            placeholder="Select node..."
+                            >
+                                <option selected>Select a Node by ID</option>
+                                
+                                    <option value="Zbigniew Abramowicz">Zbigniew Abramowicz</option>
+                                
+                                    <option value="Bilety24">Bilety24</option>
+                                
+                                    <option value="Katarzyna Abramowicz">Katarzyna Abramowicz</option>
+                                
+                                    <option value="Piotr Marcin Kurczewski">Piotr Marcin Kurczewski</option>
+                                
+                                    <option value="PayPro SA">PayPro SA</option>
+                                
+                                    <option value="CHESHIRE MALTA LTD">CHESHIRE MALTA LTD</option>
+                                
+                                    <option value="QR LIMITED">QR LIMITED</option>
+                                
+                                    <option value="Currency One SA">Currency One SA</option>
+                                
+                                    <option value="DC24 Alternatywna Spółka Inwestycyjna Sp. z o.o.">DC24 Alternatywna Spółka Inwestycyjna Sp. z o.o.</option>
+                                
+                                    <option value=""Marmur" Sławniowice Sp. z o.o.">"Marmur" Sławniowice Sp. z o.o.</option>
+                                
+                                    <option value="DialCom24 Sp. z o.o.">DialCom24 Sp. z o.o.</option>
+                                
+                                    <option value="Nets Denmark A/S">Nets Denmark A/S</option>
+                                
+                                    <option value="P24 Dotcard Sp. z o.o.">P24 Dotcard Sp. z o.o.</option>
+                                
+                                    <option value="Michał Bochowicz">Michał Bochowicz</option>
+                                
+                                    <option value="Kancelaria Gessel">Kancelaria Gessel</option>
+                                
+                                    <option value="Saule Technologies">Saule Technologies</option>
+                                
+                                    <option value="Olga Malinkiewicz">Olga Malinkiewicz</option>
+                                
+                                    <option value="Columbus Energy SA">Columbus Energy SA</option>
+                                
+                                    <option value="Arkadiusz Krzemiński">Arkadiusz Krzemiński</option>
+                                
+                                    <option value="PayPo Sp. z o.o.">PayPo Sp. z o.o.</option>
+                                
+                                    <option value="Anna Szymańska-Piper">Anna Szymańska-Piper</option>
+                                
+                                    <option value="ADM 14 Sp. z o.o.">ADM 14 Sp. z o.o.</option>
+                                
+                            </select>
+                        </div>
+                        <div class="col-2 pb-2">
+                            <button type="button" class="btn btn-primary btn-block" onclick="neighbourhoodHighlight({nodes: []});">Reset Selection</button>
+                        </div>
+                    </div>
+                </div>
+            
+            
+              <div id="filter-menu" class="card-header">
+                <div class="row no-gutters">
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="updateFilter(value, 'item')"
+                            id="select-item"
+                        >
+                        <option value="">Select a network item</option>
+                        <option value="edge">edge</option>
+                        <option value="node">node</option>
+                    </select>
+                  </div>
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            onchange="updateFilter(value, 'property')"
+                            id="select-property"
+                        >
+                        <option value="">Select a property...</option>
+                    </select>
+                  </div>
+                  <div class="col-3 pb-2">
+                    <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            id="select-value"
+                        >
+                        <option value="">Select value(s)...</option>
+                    </select>
+                  </div>
+                  <div class="col-1 pb-2">
+                    <button type="button" class="btn btn-primary btn-block" onclick="highlightFilter(filter);">Filter</button>
+                  </div>
+                  <div class="col-2 pb-2">
+                    <button type="button" class="btn btn-primary btn-block" onclick="clearFilter(true)">Reset Selection</button>
+                  </div>
+                </div>
+              </div>
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+                  new TomSelect("#select-node",{
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      }
+                  });
+              
+
+              
+                  // explicitly using onItemAdd and this function as we need to save multiple values
+                  let updateValueFilter = function() {
+                      return function () {
+                      filter['value'].push(arguments[0])
+                      }
+                  }
+
+                  let valueControl = new TomSelect("#select-value",{
+                      maxItems: null,
+                      valueField: 'id',
+                      labelField: 'title',
+                      searchField: 'title',
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: updateValueFilter()
+                  });
+
+                  let addValues = function() {
+                      return function () {
+                          // clear the current value options and add the selected attribute values
+                          // tom-select handles duplicates
+                          let selectedProperty = arguments[0];
+                          valueControl.clear();
+                          valueControl.clearOptions();
+                          filter['value'] = []
+                          if (filter['item'] === 'node') {
+                              for (let each in allNodes) {
+                                  valueControl.addOption({
+                                      id:allNodes[each][selectedProperty],
+                                      title:allNodes[each][selectedProperty]
+                                  })
+                              }
+                          }
+                          else if (filter['item'] === 'edge') {
+                              for (let each in allEdges) {
+                                  valueControl.addOption({
+                                      id:allEdges[each][selectedProperty],
+                                      title:allEdges[each][selectedProperty]
+                                  })
+                              }
+                          }
+                      }
+                  };
+
+                  let propControl = new TomSelect("#select-property",{
+                      valueField: 'id',
+                      labelField: 'title',
+                      searchField: 'title',
+                      create: false,
+                      sortField: {
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: addValues()
+                  });
+
+                  let addProperties = function() {
+                      return function () {
+                          // loops through the selected network item and adds the attributes to dropdown
+                          // tom-select handles duplicates
+                          clearFilter(false)
+                          if (arguments[0] === 'edge') {
+                              for (let each in allEdges) {
+                                  if (allEdges.hasOwnProperty(each)) {
+                                      for (let eachProp in allEdges[each]) {
+                                          if (allEdges[each].hasOwnProperty(eachProp)) {
+                                              propControl.addOption({id: eachProp, title: eachProp})
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                          else if (arguments[0] === 'node') {
+                              for (let each in allNodes) {
+                                  if (allNodes.hasOwnProperty(each)) {
+                                      for (let eachProp in allNodes[each]) {
+                                          if (allNodes[each].hasOwnProperty(eachProp)
+                                              && (eachProp !== 'hidden' && eachProp !== 'savedLabel'
+                                                  && eachProp !== 'hiddenLabel')) {
+                                              propControl.addOption({id: eachProp, title: eachProp})
+
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  };
+
+                  let itemControl = new TomSelect("#select-item",{
+                      create: false,
+                      sortField:{
+                          field: "text",
+                          direction: "asc"
+                      },
+                      onItemAdd: addProperties()
+                  });
+
+                  function clearFilter(reset) {
+                      // utility function to clear all the selected filter options
+                      // if reset is set to true, the existing filter will be removed
+                      // else, only the dropdown options are cleared
+                      propControl.clear();
+                      propControl.clearOptions();
+                      valueControl.clear();
+                      valueControl.clearOptions();
+                      filter = {
+                          item : '',
+                          property : '',
+                          value : []
+                      }
+                      if (reset) {
+                          itemControl.clear();
+                          filterHighlight({nodes: []})
+                      }
+                  }
+
+                  function updateFilter(value, key) {
+                      // key could be 'item' or 'property' and value is as selected in dropdown
+                      filter[key] = value
+                  }
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"font": {"color": "white"}, "group": "DEFAULT", "id": "Zbigniew Abramowicz", "label": "Zbigniew Abramowicz", "shape": "dot", "size": 10, "title": "Zbigniew Abramowicz (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Bilety24", "label": "Bilety24", "shape": "dot", "size": 10, "title": "Bilety24 (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Katarzyna Abramowicz", "label": "Katarzyna Abramowicz", "shape": "dot", "size": 10, "title": "Katarzyna Abramowicz (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Piotr Marcin Kurczewski", "label": "Piotr Marcin Kurczewski", "shape": "dot", "size": 10, "title": "Piotr Marcin Kurczewski (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "PayPro SA", "label": "PayPro SA", "shape": "dot", "size": 10, "title": "PayPro SA (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "CHESHIRE MALTA LTD", "label": "CHESHIRE MALTA LTD", "shape": "dot", "size": 10, "title": "CHESHIRE MALTA LTD (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "QR LIMITED", "label": "QR LIMITED", "shape": "dot", "size": 10, "title": "QR LIMITED (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Currency One SA", "label": "Currency One SA", "shape": "dot", "size": 10, "title": "Currency One SA (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "DC24 Alternatywna Sp\u00f3\u0142ka Inwestycyjna Sp. z o.o.", "label": "DC24 Alternatywna Sp\u00f3\u0142ka Inwestycyjna Sp. z o.o.", "shape": "dot", "size": 10, "title": "DC24 Alternatywna Sp\u00f3\u0142ka Inwestycyjna Sp. z o.o. (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "\"Marmur\" S\u0142awniowice Sp. z o.o.", "label": "\"Marmur\" S\u0142awniowice Sp. z o.o.", "shape": "dot", "size": 10, "title": "\"Marmur\" S\u0142awniowice Sp. z o.o. (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "DialCom24 Sp. z o.o.", "label": "DialCom24 Sp. z o.o.", "shape": "dot", "size": 10, "title": "DialCom24 Sp. z o.o. (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Nets Denmark A/S", "label": "Nets Denmark A/S", "shape": "dot", "size": 10, "title": "Nets Denmark A/S (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "P24 Dotcard Sp. z o.o.", "label": "P24 Dotcard Sp. z o.o.", "shape": "dot", "size": 10, "title": "P24 Dotcard Sp. z o.o. (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Micha\u0142 Bochowicz", "label": "Micha\u0142 Bochowicz", "shape": "dot", "size": 10, "title": "Micha\u0142 Bochowicz (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Kancelaria Gessel", "label": "Kancelaria Gessel", "shape": "dot", "size": 10, "title": "Kancelaria Gessel (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Saule Technologies", "label": "Saule Technologies", "shape": "dot", "size": 10, "title": "Saule Technologies (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Olga Malinkiewicz", "label": "Olga Malinkiewicz", "shape": "dot", "size": 10, "title": "Olga Malinkiewicz (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Columbus Energy SA", "label": "Columbus Energy SA", "shape": "dot", "size": 10, "title": "Columbus Energy SA (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Arkadiusz Krzemi\u0144ski", "label": "Arkadiusz Krzemi\u0144ski", "shape": "dot", "size": 10, "title": "Arkadiusz Krzemi\u0144ski (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "PayPo Sp. z o.o.", "label": "PayPo Sp. z o.o.", "shape": "dot", "size": 10, "title": "PayPo Sp. z o.o. (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Anna Szyma\u0144ska-Piper", "label": "Anna Szyma\u0144ska-Piper", "shape": "dot", "size": 10, "title": "Anna Szyma\u0144ska-Piper (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "ADM 14 Sp. z o.o.", "label": "ADM 14 Sp. z o.o.", "shape": "dot", "size": 10, "title": "ADM 14 Sp. z o.o. (DEFAULT)"}]);
+                  edges = new vis.DataSet([{"from": "Zbigniew Abramowicz", "label": "WSP\u00d3\u0141TWORZY\u0141", "title": "WSP\u00d3\u0141TWORZY\u0141: Zbigniew Abramowicz by\u0142 g\u0142\u00f3wnym projektantem i wizjonerem technologicznym Bilety24.", "to": "Bilety24", "width": 1}, {"from": "Katarzyna Abramowicz", "label": "WSP\u00d3\u0141TWORZY\u0141A", "title": "WSP\u00d3\u0141TWORZY\u0141A: Katarzyna Abramowicz odpowiada\u0142a za aspekty prawne i rozw\u00f3j biznesu Bilety24.", "to": "Bilety24", "width": 1}, {"from": "Piotr Marcin Kurczewski", "label": "PRZEJ\u0104\u0141", "title": "PRZEJ\u0104\u0141: Kurczewski sta\u0142 na czele grupy inwestor\u00f3w, kt\u00f3ra przej\u0119\u0142a pakiety kontrolne w sp\u00f3\u0142kach Abramowicz\u00f3w (Bilety24, Przelewy24, Box24).", "to": "Bilety24", "width": 1}, {"from": "Piotr Marcin Kurczewski", "label": "SPRZEDA\u0141_UDZIA\u0141Y", "title": "SPRZEDA\u0141_UDZIA\u0141Y: W 2019 roku Piotr Kurczewski sprzeda\u0142 wi\u0119kszo\u015bciowy pakiet udzia\u0142\u00f3w w PayPro SA du\u0144skiemu gigantowi Nets Denmark A/S.", "to": "PayPro SA", "width": 1}, {"from": "Piotr Marcin Kurczewski", "label": "ZARZ\u0104DZA", "title": "ZARZ\u0104DZA: Piotr Kurczewski figuruje jako Director i Shareholder w CHESHIRE MALTA LTD.", "to": "CHESHIRE MALTA LTD", "width": 1}, {"from": "Piotr Marcin Kurczewski", "label": "ZARZ\u0104DZA", "title": "ZARZ\u0104DZA: Piotr Kurczewski figuruje jako Director i Shareholder w QR LIMITED na Malcie.", "to": "QR LIMITED", "width": 1}, {"from": "Piotr Marcin Kurczewski", "label": "ZARZ\u0104DZA", "title": "ZARZ\u0104DZA: Piotr Kurczewski pe\u0142ni funkcj\u0119 Prezesa w Currency One SA.", "to": "Currency One SA", "width": 1}, {"from": "Piotr Marcin Kurczewski", "label": "KONTROLUJE", "title": "KONTROLUJE: DC24 ASI to wehiku\u0142 inwestycyjny, w kt\u00f3rym koncentruje si\u0119 obecna pot\u0119ga Kurczewskiego.", "to": "DC24 Alternatywna Sp\u00f3\u0142ka Inwestycyjna Sp. z o.o.", "width": 1}, {"from": "Piotr Marcin Kurczewski", "label": "POSIADA_UDZIA\u0141Y", "title": "POSIADA_UDZIA\u0141Y: Piotr Kurczewski posiada 89-90% udzia\u0142\u00f3w w sp\u00f3\u0142ce \"Marmur\" S\u0142awniowice Sp. z o.o.", "to": "\"Marmur\" S\u0142awniowice Sp. z o.o.", "width": 1}, {"from": "DialCom24 Sp. z o.o.", "label": "PRZEKAZA\u0141A_AKTYWA", "title": "PRZEKAZA\u0141A_AKTYWA: Kluczowe aktywa (marka Przelewy24, technologia) by\u0142y transferowane z DialCom24 do PayPro SA.", "to": "PayPro SA", "width": 1}, {"from": "Nets Denmark A/S", "label": "POSIADA_UDZIA\u0141Y", "title": "POSIADA_UDZIA\u0141Y: Nets Denmark A/S obj\u0105\u0142 51% udzia\u0142\u00f3w w holdingu P24 Dotcard Sp. z o.o.", "to": "P24 Dotcard Sp. z o.o.", "width": 1}, {"from": "P24 Dotcard Sp. z o.o.", "label": "KONTROLUJE", "title": "KONTROLUJE: P24 Dotcard Sp. z o.o. kontroluje PayPro, Dotpay i eCard.", "to": "PayPro SA", "width": 1}, {"from": "Micha\u0142 Bochowicz", "label": "PRACUJE_W", "title": "PRACUJE_W: Mecenas Micha\u0142 Bochowicz z kancelarii Gessel.", "to": "Kancelaria Gessel", "width": 1}, {"from": "Micha\u0142 Bochowicz", "label": "DORADZA\u0141_PRAWNIE", "title": "DORADZA\u0141_PRAWNIE: Micha\u0142 Bochowicz by\u0142 architektem prawnym transakcji z Nets, doradzaj\u0105c Kurczewskiemu.", "to": "Piotr Marcin Kurczewski", "width": 1}, {"from": "DC24 Alternatywna Sp\u00f3\u0142ka Inwestycyjna Sp. z o.o.", "label": "INWESTUJE_W", "title": "INWESTUJE_W: DC24 ASI udzieli\u0142o finansowania pomostowego Saule Technologies, a nast\u0119pnie przej\u0119\u0142o kontrol\u0119.", "to": "Saule Technologies", "width": 1}, {"from": "DC24 Alternatywna Sp\u00f3\u0142ka Inwestycyjna Sp. z o.o.", "label": "PRZEJ\u0104\u0141_AKCJE_OD", "title": "PRZEJ\u0104\u0141_AKCJE_OD: DC24 ASI przyst\u0105pi\u0142o do egzekucji zabezpiecze\u0144 na akcjach nale\u017c\u0105cych do Olgi Malinkiewicz.", "to": "Olga Malinkiewicz", "width": 1}, {"from": "DC24 Alternatywna Sp\u00f3\u0142ka Inwestycyjna Sp. z o.o.", "label": "INWESTUJE_W", "title": "INWESTUJE_W: DC24 ASI posiada pakiet ~20% akcji Columbus Energy SA.", "to": "Columbus Energy SA", "width": 1}, {"from": "Arkadiusz Krzemi\u0144ski", "label": "CZ\u0141ONEK_RADY_NADZORCZEJ", "title": "CZ\u0141ONEK_RADY_NADZORCZEJ: Arkadiusz Krzemi\u0144ski jest cz\u0142onkiem Rady Nadzorczej w PayPo.", "to": "PayPo Sp. z o.o.", "width": 1}, {"from": "Arkadiusz Krzemi\u0144ski", "label": "CZ\u0141ONEK_RADY_NADZORCZEJ", "title": "CZ\u0141ONEK_RADY_NADZORCZEJ: Arkadiusz Krzemi\u0144ski jest cz\u0142onkiem Rady Nadzorczej w Currency One.", "to": "Currency One SA", "width": 1}, {"from": "Arkadiusz Krzemi\u0144ski", "label": "CZ\u0141ONEK_RADY_NADZORCZEJ", "title": "CZ\u0141ONEK_RADY_NADZORCZEJ: Arkadiusz Krzemi\u0144ski jest cz\u0142onkiem Rady Nadzorczej w Saule Technologies.", "to": "Saule Technologies", "width": 1}, {"from": "Anna Szyma\u0144ska-Piper", "label": "ZARZ\u0104DZA", "title": "ZARZ\u0104DZA: Anna Szyma\u0144ska-Piper jest Prezesem Zarz\u0105du ADM 14 Sp. z o.o.", "to": "ADM 14 Sp. z o.o.", "width": 1}, {"from": "Anna Szyma\u0144ska-Piper", "label": "CZ\u0141ONEK_RADY_NADZORCZEJ", "title": "CZ\u0141ONEK_RADY_NADZORCZEJ: Anna Szyma\u0144ska-Piper jest Cz\u0142onkiem Rady Nadzorczej Saule Technologies.", "to": "Saule Technologies", "width": 1}, {"from": "Olga Malinkiewicz", "label": "ZA\u0141O\u017bY\u0141A", "title": "ZA\u0141O\u017bY\u0141A: Olga Malinkiewicz jest tw\u00f3rczyni\u0105 technologii i za\u0142o\u017cycielk\u0105 Saule Technologies.", "to": "Saule Technologies", "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+  "manipulation": {"enabled": false},
+  "configure": {"enabled": false},
+  "nodes": {
+    "shape": "dot",
+    "size": 20,
+    "font": {"size": 14, "color": "#ffffff"},
+    "borderWidth": 2
+  },
+  "edges": {
+    "width": 3,                       
+    "color": {
+      "color": "#DC143C",             
+      "highlight": "#FF0000",         
+      "hover": "#DC143C",
+      "opacity": 0.85                  
+    },
+    "smooth": {"type": "continuous"},
+    "arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}
+  },
+  "physics": {
+    "forceAtlas2Based": {
+      "gravitationalConstant": -100,
+      "centralGravity": 0.005,
+      "springLength": 230,
+      "springConstant": 0.18
+    },
+    "maxVelocity": 50,
+    "solver": "forceAtlas2Based",
+    "timestep": 0.35,
+    "stabilization": {"enabled": true, "iterations": 150}
+  }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+                    network.on("selectNode", neighbourhoodHighlight);
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
