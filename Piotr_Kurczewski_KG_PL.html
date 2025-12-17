@@ -300,6 +300,8 @@ function highlightFilter(filter) {
                                 
                                     <option value="Bilety24">Bilety24</option>
                                 
+                                    <option value="Przelewy24">Przelewy24</option>
+                                
                                     <option value="Katarzyna Abramowicz">Katarzyna Abramowicz</option>
                                 
                                     <option value="Piotr Marcin Kurczewski">Piotr Marcin Kurczewski</option>
@@ -316,11 +318,19 @@ function highlightFilter(filter) {
                                 
                                     <option value=""Marmur" Sławniowice Sp. z o.o.">"Marmur" Sławniowice Sp. z o.o.</option>
                                 
-                                    <option value="DialCom24 Sp. z o.o.">DialCom24 Sp. z o.o.</option>
-                                
                                     <option value="Nets Denmark A/S">Nets Denmark A/S</option>
                                 
                                     <option value="P24 Dotcard Sp. z o.o.">P24 Dotcard Sp. z o.o.</option>
+                                
+                                    <option value="Cheshire Malta Ltd">Cheshire Malta Ltd</option>
+                                
+                                    <option value="DialCom24 Sp. z o.o.">DialCom24 Sp. z o.o.</option>
+                                
+                                    <option value="KRS 0000306513">KRS 0000306513</option>
+                                
+                                    <option value="KRS 0000347935">KRS 0000347935</option>
+                                
+                                    <option value="KRS 0000629532">KRS 0000629532</option>
                                 
                                     <option value="Michał Bochowicz">Michał Bochowicz</option>
                                 
@@ -332,6 +342,8 @@ function highlightFilter(filter) {
                                 
                                     <option value="Columbus Energy SA">Columbus Energy SA</option>
                                 
+                                    <option value="KRS 0000897201">KRS 0000897201</option>
+                                
                                     <option value="Arkadiusz Krzemiński">Arkadiusz Krzemiński</option>
                                 
                                     <option value="PayPo Sp. z o.o.">PayPo Sp. z o.o.</option>
@@ -339,6 +351,16 @@ function highlightFilter(filter) {
                                     <option value="Anna Szymańska-Piper">Anna Szymańska-Piper</option>
                                 
                                     <option value="ADM 14 Sp. z o.o.">ADM 14 Sp. z o.o.</option>
+                                
+                                    <option value="ADM14 Sp. z o.o.">ADM14 Sp. z o.o.</option>
+                                
+                                    <option value="KRS 0000247754">KRS 0000247754</option>
+                                
+                                    <option value="Paradise Papers">Paradise Papers</option>
+                                
+                                    <option value="QR Sp. z o.o.">QR Sp. z o.o.</option>
+                                
+                                    <option value="QR Limited">QR Limited</option>
                                 
                             </select>
                         </div>
@@ -560,51 +582,268 @@ function highlightFilter(filter) {
                   
 
                   // parsing and collecting nodes and edges from the python
-                  nodes = new vis.DataSet([{"font": {"color": "white"}, "group": "DEFAULT", "id": "Zbigniew Abramowicz", "label": "Zbigniew Abramowicz", "shape": "dot", "size": 10, "title": "Zbigniew Abramowicz (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Bilety24", "label": "Bilety24", "shape": "dot", "size": 10, "title": "Bilety24 (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Katarzyna Abramowicz", "label": "Katarzyna Abramowicz", "shape": "dot", "size": 10, "title": "Katarzyna Abramowicz (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Piotr Marcin Kurczewski", "label": "Piotr Marcin Kurczewski", "shape": "dot", "size": 10, "title": "Piotr Marcin Kurczewski (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "PayPro SA", "label": "PayPro SA", "shape": "dot", "size": 10, "title": "PayPro SA (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "CHESHIRE MALTA LTD", "label": "CHESHIRE MALTA LTD", "shape": "dot", "size": 10, "title": "CHESHIRE MALTA LTD (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "QR LIMITED", "label": "QR LIMITED", "shape": "dot", "size": 10, "title": "QR LIMITED (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Currency One SA", "label": "Currency One SA", "shape": "dot", "size": 10, "title": "Currency One SA (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "DC24 Alternatywna Sp\u00f3\u0142ka Inwestycyjna Sp. z o.o.", "label": "DC24 Alternatywna Sp\u00f3\u0142ka Inwestycyjna Sp. z o.o.", "shape": "dot", "size": 10, "title": "DC24 Alternatywna Sp\u00f3\u0142ka Inwestycyjna Sp. z o.o. (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "\"Marmur\" S\u0142awniowice Sp. z o.o.", "label": "\"Marmur\" S\u0142awniowice Sp. z o.o.", "shape": "dot", "size": 10, "title": "\"Marmur\" S\u0142awniowice Sp. z o.o. (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "DialCom24 Sp. z o.o.", "label": "DialCom24 Sp. z o.o.", "shape": "dot", "size": 10, "title": "DialCom24 Sp. z o.o. (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Nets Denmark A/S", "label": "Nets Denmark A/S", "shape": "dot", "size": 10, "title": "Nets Denmark A/S (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "P24 Dotcard Sp. z o.o.", "label": "P24 Dotcard Sp. z o.o.", "shape": "dot", "size": 10, "title": "P24 Dotcard Sp. z o.o. (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Micha\u0142 Bochowicz", "label": "Micha\u0142 Bochowicz", "shape": "dot", "size": 10, "title": "Micha\u0142 Bochowicz (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Kancelaria Gessel", "label": "Kancelaria Gessel", "shape": "dot", "size": 10, "title": "Kancelaria Gessel (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Saule Technologies", "label": "Saule Technologies", "shape": "dot", "size": 10, "title": "Saule Technologies (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Olga Malinkiewicz", "label": "Olga Malinkiewicz", "shape": "dot", "size": 10, "title": "Olga Malinkiewicz (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Columbus Energy SA", "label": "Columbus Energy SA", "shape": "dot", "size": 10, "title": "Columbus Energy SA (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Arkadiusz Krzemi\u0144ski", "label": "Arkadiusz Krzemi\u0144ski", "shape": "dot", "size": 10, "title": "Arkadiusz Krzemi\u0144ski (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "PayPo Sp. z o.o.", "label": "PayPo Sp. z o.o.", "shape": "dot", "size": 10, "title": "PayPo Sp. z o.o. (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Anna Szyma\u0144ska-Piper", "label": "Anna Szyma\u0144ska-Piper", "shape": "dot", "size": 10, "title": "Anna Szyma\u0144ska-Piper (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "ADM 14 Sp. z o.o.", "label": "ADM 14 Sp. z o.o.", "shape": "dot", "size": 10, "title": "ADM 14 Sp. z o.o. (DEFAULT)"}]);
-                  edges = new vis.DataSet([{"from": "Zbigniew Abramowicz", "label": "WSP\u00d3\u0141TWORZY\u0141", "title": "WSP\u00d3\u0141TWORZY\u0141: Zbigniew Abramowicz by\u0142 g\u0142\u00f3wnym projektantem i wizjonerem technologicznym Bilety24.", "to": "Bilety24", "width": 1}, {"from": "Katarzyna Abramowicz", "label": "WSP\u00d3\u0141TWORZY\u0141A", "title": "WSP\u00d3\u0141TWORZY\u0141A: Katarzyna Abramowicz odpowiada\u0142a za aspekty prawne i rozw\u00f3j biznesu Bilety24.", "to": "Bilety24", "width": 1}, {"from": "Piotr Marcin Kurczewski", "label": "PRZEJ\u0104\u0141", "title": "PRZEJ\u0104\u0141: Kurczewski sta\u0142 na czele grupy inwestor\u00f3w, kt\u00f3ra przej\u0119\u0142a pakiety kontrolne w sp\u00f3\u0142kach Abramowicz\u00f3w (Bilety24, Przelewy24, Box24).", "to": "Bilety24", "width": 1}, {"from": "Piotr Marcin Kurczewski", "label": "SPRZEDA\u0141_UDZIA\u0141Y", "title": "SPRZEDA\u0141_UDZIA\u0141Y: W 2019 roku Piotr Kurczewski sprzeda\u0142 wi\u0119kszo\u015bciowy pakiet udzia\u0142\u00f3w w PayPro SA du\u0144skiemu gigantowi Nets Denmark A/S.", "to": "PayPro SA", "width": 1}, {"from": "Piotr Marcin Kurczewski", "label": "ZARZ\u0104DZA", "title": "ZARZ\u0104DZA: Piotr Kurczewski figuruje jako Director i Shareholder w CHESHIRE MALTA LTD.", "to": "CHESHIRE MALTA LTD", "width": 1}, {"from": "Piotr Marcin Kurczewski", "label": "ZARZ\u0104DZA", "title": "ZARZ\u0104DZA: Piotr Kurczewski figuruje jako Director i Shareholder w QR LIMITED na Malcie.", "to": "QR LIMITED", "width": 1}, {"from": "Piotr Marcin Kurczewski", "label": "ZARZ\u0104DZA", "title": "ZARZ\u0104DZA: Piotr Kurczewski pe\u0142ni funkcj\u0119 Prezesa w Currency One SA.", "to": "Currency One SA", "width": 1}, {"from": "Piotr Marcin Kurczewski", "label": "KONTROLUJE", "title": "KONTROLUJE: DC24 ASI to wehiku\u0142 inwestycyjny, w kt\u00f3rym koncentruje si\u0119 obecna pot\u0119ga Kurczewskiego.", "to": "DC24 Alternatywna Sp\u00f3\u0142ka Inwestycyjna Sp. z o.o.", "width": 1}, {"from": "Piotr Marcin Kurczewski", "label": "POSIADA_UDZIA\u0141Y", "title": "POSIADA_UDZIA\u0141Y: Piotr Kurczewski posiada 89-90% udzia\u0142\u00f3w w sp\u00f3\u0142ce \"Marmur\" S\u0142awniowice Sp. z o.o.", "to": "\"Marmur\" S\u0142awniowice Sp. z o.o.", "width": 1}, {"from": "DialCom24 Sp. z o.o.", "label": "PRZEKAZA\u0141A_AKTYWA", "title": "PRZEKAZA\u0141A_AKTYWA: Kluczowe aktywa (marka Przelewy24, technologia) by\u0142y transferowane z DialCom24 do PayPro SA.", "to": "PayPro SA", "width": 1}, {"from": "Nets Denmark A/S", "label": "POSIADA_UDZIA\u0141Y", "title": "POSIADA_UDZIA\u0141Y: Nets Denmark A/S obj\u0105\u0142 51% udzia\u0142\u00f3w w holdingu P24 Dotcard Sp. z o.o.", "to": "P24 Dotcard Sp. z o.o.", "width": 1}, {"from": "P24 Dotcard Sp. z o.o.", "label": "KONTROLUJE", "title": "KONTROLUJE: P24 Dotcard Sp. z o.o. kontroluje PayPro, Dotpay i eCard.", "to": "PayPro SA", "width": 1}, {"from": "Micha\u0142 Bochowicz", "label": "PRACUJE_W", "title": "PRACUJE_W: Mecenas Micha\u0142 Bochowicz z kancelarii Gessel.", "to": "Kancelaria Gessel", "width": 1}, {"from": "Micha\u0142 Bochowicz", "label": "DORADZA\u0141_PRAWNIE", "title": "DORADZA\u0141_PRAWNIE: Micha\u0142 Bochowicz by\u0142 architektem prawnym transakcji z Nets, doradzaj\u0105c Kurczewskiemu.", "to": "Piotr Marcin Kurczewski", "width": 1}, {"from": "DC24 Alternatywna Sp\u00f3\u0142ka Inwestycyjna Sp. z o.o.", "label": "INWESTUJE_W", "title": "INWESTUJE_W: DC24 ASI udzieli\u0142o finansowania pomostowego Saule Technologies, a nast\u0119pnie przej\u0119\u0142o kontrol\u0119.", "to": "Saule Technologies", "width": 1}, {"from": "DC24 Alternatywna Sp\u00f3\u0142ka Inwestycyjna Sp. z o.o.", "label": "PRZEJ\u0104\u0141_AKCJE_OD", "title": "PRZEJ\u0104\u0141_AKCJE_OD: DC24 ASI przyst\u0105pi\u0142o do egzekucji zabezpiecze\u0144 na akcjach nale\u017c\u0105cych do Olgi Malinkiewicz.", "to": "Olga Malinkiewicz", "width": 1}, {"from": "DC24 Alternatywna Sp\u00f3\u0142ka Inwestycyjna Sp. z o.o.", "label": "INWESTUJE_W", "title": "INWESTUJE_W: DC24 ASI posiada pakiet ~20% akcji Columbus Energy SA.", "to": "Columbus Energy SA", "width": 1}, {"from": "Arkadiusz Krzemi\u0144ski", "label": "CZ\u0141ONEK_RADY_NADZORCZEJ", "title": "CZ\u0141ONEK_RADY_NADZORCZEJ: Arkadiusz Krzemi\u0144ski jest cz\u0142onkiem Rady Nadzorczej w PayPo.", "to": "PayPo Sp. z o.o.", "width": 1}, {"from": "Arkadiusz Krzemi\u0144ski", "label": "CZ\u0141ONEK_RADY_NADZORCZEJ", "title": "CZ\u0141ONEK_RADY_NADZORCZEJ: Arkadiusz Krzemi\u0144ski jest cz\u0142onkiem Rady Nadzorczej w Currency One.", "to": "Currency One SA", "width": 1}, {"from": "Arkadiusz Krzemi\u0144ski", "label": "CZ\u0141ONEK_RADY_NADZORCZEJ", "title": "CZ\u0141ONEK_RADY_NADZORCZEJ: Arkadiusz Krzemi\u0144ski jest cz\u0142onkiem Rady Nadzorczej w Saule Technologies.", "to": "Saule Technologies", "width": 1}, {"from": "Anna Szyma\u0144ska-Piper", "label": "ZARZ\u0104DZA", "title": "ZARZ\u0104DZA: Anna Szyma\u0144ska-Piper jest Prezesem Zarz\u0105du ADM 14 Sp. z o.o.", "to": "ADM 14 Sp. z o.o.", "width": 1}, {"from": "Anna Szyma\u0144ska-Piper", "label": "CZ\u0141ONEK_RADY_NADZORCZEJ", "title": "CZ\u0141ONEK_RADY_NADZORCZEJ: Anna Szyma\u0144ska-Piper jest Cz\u0142onkiem Rady Nadzorczej Saule Technologies.", "to": "Saule Technologies", "width": 1}, {"from": "Olga Malinkiewicz", "label": "ZA\u0141O\u017bY\u0141A", "title": "ZA\u0141O\u017bY\u0141A: Olga Malinkiewicz jest tw\u00f3rczyni\u0105 technologii i za\u0142o\u017cycielk\u0105 Saule Technologies.", "to": "Saule Technologies", "width": 1}]);
-
-                  nodeColors = {};
-                  allNodes = nodes.get({ returnType: "Object" });
-                  for (nodeId in allNodes) {
-                    nodeColors[nodeId] = allNodes[nodeId].color;
-                  }
-                  allEdges = edges.get({ returnType: "Object" });
-                  // adding nodes and edges to the graph
-                  data = {nodes: nodes, edges: edges};
-
-                  var options = {
-  "manipulation": {"enabled": false},
-  "configure": {"enabled": false},
-  "nodes": {
-    "shape": "dot",
-    "size": 20,
-    "font": {"size": 14, "color": "#ffffff"},
-    "borderWidth": 2
+                  nodes = new vis.DataSet([{"font": {"color": "white"}, "group": "DEFAULT", "id": "Zbigniew Abramowicz", "label": "Zbigniew Abramowicz", "shape": "dot", "size": 10, "title": "Zbigniew Abramowicz (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Bilety24", "label": "Bilety24", "shape": "dot", "size": 10, "title": "Bilety24 (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Przelewy24", "label": "Przelewy24", "shape": "dot", "size": 10, "title": "Przelewy24 (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Katarzyna Abramowicz", "label": "Katarzyna Abramowicz", "shape": "dot", "size": 10, "title": "Katarzyna Abramowicz (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Piotr Marcin Kurczewski", "label": "Piotr Marcin Kurczewski", "shape": "dot", "size": 10, "title": "Piotr Marcin Kurczewski (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "PayPro SA", "label": "PayPro SA", "shape": "dot", "size": 10, "title": "PayPro SA (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "CHESHIRE MALTA LTD", "label": "CHESHIRE MALTA LTD", "shape": "dot", "size": 10, "title": "CHESHIRE MALTA LTD (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "QR LIMITED", "label": "QR LIMITED", "shape": "dot", "size": 10, "title": "QR LIMITED (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Currency One SA", "label": "Currency One SA", "shape": "dot", "size": 10, "title": "Currency One SA (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "DC24 Alternatywna Sp\u00f3\u0142ka Inwestycyjna Sp. z o.o.", "label": "DC24 Alternatywna Sp\u00f3\u0142ka Inwestycyjna Sp. z o.o.", "shape": "dot", "size": 10, "title": "DC24 Alternatywna Sp\u00f3\u0142ka Inwestycyjna Sp. z o.o. (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "\"Marmur\" S\u0142awniowice Sp. z o.o.", "label": "\"Marmur\" S\u0142awniowice Sp. z o.o.", "shape": "dot", "size": 10, "title": "\"Marmur\" S\u0142awniowice Sp. z o.o. (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Nets Denmark A/S", "label": "Nets Denmark A/S", "shape": "dot", "size": 10, "title": "Nets Denmark A/S (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "P24 Dotcard Sp. z o.o.", "label": "P24 Dotcard Sp. z o.o.", "shape": "dot", "size": 10, "title": "P24 Dotcard Sp. z o.o. (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Cheshire Malta Ltd", "label": "Cheshire Malta Ltd", "shape": "dot", "size": 10, "title": "Cheshire Malta Ltd (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "DialCom24 Sp. z o.o.", "label": "DialCom24 Sp. z o.o.", "shape": "dot", "size": 10, "title": "DialCom24 Sp. z o.o. (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "KRS 0000306513", "label": "KRS 0000306513", "shape": "dot", "size": 10, "title": "KRS 0000306513 (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "KRS 0000347935", "label": "KRS 0000347935", "shape": "dot", "size": 10, "title": "KRS 0000347935 (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "KRS 0000629532", "label": "KRS 0000629532", "shape": "dot", "size": 10, "title": "KRS 0000629532 (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Micha\u0142 Bochowicz", "label": "Micha\u0142 Bochowicz", "shape": "dot", "size": 10, "title": "Micha\u0142 Bochowicz (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Kancelaria Gessel", "label": "Kancelaria Gessel", "shape": "dot", "size": 10, "title": "Kancelaria Gessel (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Saule Technologies", "label": "Saule Technologies", "shape": "dot", "size": 10, "title": "Saule Technologies (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Olga Malinkiewicz", "label": "Olga Malinkiewicz", "shape": "dot", "size": 10, "title": "Olga Malinkiewicz (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Columbus Energy SA", "label": "Columbus Energy SA", "shape": "dot", "size": 10, "title": "Columbus Energy SA (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "KRS 0000897201", "label": "KRS 0000897201", "shape": "dot", "size": 10, "title": "KRS 0000897201 (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Arkadiusz Krzemi\u0144ski", "label": "Arkadiusz Krzemi\u0144ski", "shape": "dot", "size": 10, "title": "Arkadiusz Krzemi\u0144ski (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "PayPo Sp. z o.o.", "label": "PayPo Sp. z o.o.", "shape": "dot", "size": 10, "title": "PayPo Sp. z o.o. (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Anna Szyma\u0144ska-Piper", "label": "Anna Szyma\u0144ska-Piper", "shape": "dot", "size": 10, "title": "Anna Szyma\u0144ska-Piper (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "ADM 14 Sp. z o.o.", "label": "ADM 14 Sp. z o.o.", "shape": "dot", "size": 10, "title": "ADM 14 Sp. z o.o. (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "ADM14 Sp. z o.o.", "label": "ADM14 Sp. z o.o.", "shape": "dot", "size": 10, "title": "ADM14 Sp. z o.o. (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "KRS 0000247754", "label": "KRS 0000247754", "shape": "dot", "size": 10, "title": "KRS 0000247754 (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "Paradise Papers", "label": "Paradise Papers", "shape": "dot", "size": 10, "title": "Paradise Papers (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "QR Sp. z o.o.", "label": "QR Sp. z o.o.", "shape": "dot", "size": 10, "title": "QR Sp. z o.o. (DEFAULT)"}, {"font": {"color": "white"}, "group": "DEFAULT", "id": "QR Limited", "label": "QR Limited", "shape": "dot", "size": 10, "title": "QR Limited (DEFAULT)"}]);
+                  edges = new vis.DataSet([
+  {
+    "from": "Zbigniew Abramowicz",
+    "label": "WSPÓŁTWORZYŁ",
+    "title": "WSPÓŁTWORZYŁ: Zbigniew Abramowicz był głównym projektantem i wizjonerem technologicznym Bilety24.",
+    "to": "Bilety24",
+    "width": 1
   },
-  "edges": {
-    "width": 3,                       
-    "color": {
-      "color": "#DC143C",             
-      "highlight": "#FF0000",         
-      "hover": "#DC143C",
-      "opacity": 0.85                  
-    },
-    "smooth": {"type": "continuous"},
-    "arrows": {"to": {"enabled": true, "scaleFactor": 0.5}}
+  {
+    "from": "Zbigniew Abramowicz",
+    "label": "WSPÓŁTWORZYŁ",
+    "title": "WSPÓŁTWORZYŁ: Zbigniew Abramowicz był głównym projektantem i wizjonerem technologicznym Przelewy24 w fazie startupu.",
+    "to": "Przelewy24",
+    "width": 1
   },
-  "physics": {
-    "forceAtlas2Based": {
-      "gravitationalConstant": -100,
-      "centralGravity": 0.005,
-      "springLength": 230,
-      "springConstant": 0.18
-    },
-    "maxVelocity": 50,
-    "solver": "forceAtlas2Based",
-    "timestep": 0.35,
-    "stabilization": {"enabled": true, "iterations": 150}
+  {
+    "from": "Katarzyna Abramowicz",
+    "label": "WSPÓŁTWORZYŁA",
+    "title": "WSPÓŁTWORZYŁA: Katarzyna Abramowicz odpowiadała za rozwój biznesowy i osobiście odwiedzała dyrektorów kin, promując system.",
+    "to": "Bilety24",
+    "width": 1
+  },
+  {
+    "from": "Piotr Marcin Kurczewski",
+    "label": "PRZEJĄŁ",
+    "title": "PRZEJĄŁ: Kurczewski stał na czele grupy inwestorów, która przejęła pakiety kontrolne w spółkach Abramowiczów (Bilety24, Przelewy24, Box24).",
+    "to": "Bilety24",
+    "width": 1
+  },
+  {
+    "from": "Piotr Marcin Kurczewski",
+    "label": "SPRZEDAŁ_UDZIAŁY",
+    "title": "SPRZEDAŁ_UDZIAŁY: W 2019 roku Piotr Kurczewski sprzedał większościowy pakiet udziałów w PayPro SA duńskiemu gigantowi Nets Denmark A/S.",
+    "to": "PayPro SA",
+    "width": 1
+  },
+  {
+    "from": "Piotr Marcin Kurczewski",
+    "label": "ZARZĄDZA",
+    "title": "ZARZĄDZA: Piotr Kurczewski figuruje jako Director i Shareholder w CHESHIRE MALTA LTD.",
+    "to": "CHESHIRE MALTA LTD",
+    "width": 1
+  },
+  {
+    "from": "Piotr Marcin Kurczewski",
+    "label": "ZARZĄDZA",
+    "title": "ZARZĄDZA: Piotr Kurczewski figuruje jako Director i Shareholder w QR LIMITED na Malcie.",
+    "to": "QR LIMITED",
+    "width": 1
+  },
+  {
+    "from": "Piotr Marcin Kurczewski",
+    "label": "ZARZĄDZA",
+    "title": "ZARZĄDZA: Piotr Kurczewski pełni funkcję Prezesa w Currency One SA.",
+    "to": "Currency One SA",
+    "width": 1
+  },
+  {
+    "from": "Piotr Marcin Kurczewski",
+    "label": "KONTROLUJE",
+    "title": "KONTROLUJE: DC24 ASI to główne wehikuł inwestycyjny Piotra Kurczewskiego po wyjściu z PayPro.",
+    "to": "DC24 Alternatywna Spółka Inwestycyjna Sp. z o.o.",
+    "width": 1
+  },
+  {
+    "from": "Piotr Marcin Kurczewski",
+    "label": "POSIADA_UDZIAŁY",
+    "title": "POSIADA_UDZIAŁY: Piotr Kurczewski posiada 89-90% udziałów w kopalni marmuru.",
+    "to": "\"Marmur\" Sławniowice Sp. z o.o.",
+    "width": 1
+  },
+  {
+    "from": "Piotr Marcin Kurczewski",
+    "label": "PRZEJĄŁ",
+    "title": "PRZEJĄŁ: Piotr Kurczewski stał na czele grupy inwestorów, która wykupiła pakiety kontrolne od rodziny Abramowiczów.",
+    "to": "Przelewy24",
+    "width": 1
+  },
+  {
+    "from": "Piotr Marcin Kurczewski",
+    "label": "SPRZEDAŁ_UDZIAŁY",
+    "title": "SPRZEDAŁ_UDZIAŁY: Piotr Kurczewski sprzedał większościowy pakiet PayPro SA duńskiemu gigantowi Nets Denmark A/S.",
+    "to": "Nets Denmark A/S",
+    "width": 1
+  },
+  {
+    "from": "Piotr Marcin Kurczewski",
+    "label": "BLOKUJE_ZMIANY_W_KRS",
+    "title": "BLOKUJE_ZMIANY_W_KRS: Piotr Kurczewski (lub podmioty powiązane) wykorzystuje instrumenty proceduralne do blokowania ujawnienia zmian właścicielskich w KRS.",
+    "to": "P24 Dotcard Sp. z o.o.",
+    "width": 1
+  },
+  {
+    "from": "Piotr Marcin Kurczewski",
+    "label": "ZARZĄDZA",
+    "title": "ZARZĄDZA: Piotr Kurczewski widnieje w rejestrach maltańskich jako dyrektor i przedstawiciel prawny Cheshire Malta Ltd.",
+    "to": "Cheshire Malta Ltd",
+    "width": 1
+  },
+  {
+    "from": "DialCom24 Sp. z o.o.",
+    "label": "INKUBOWAŁ",
+    "title": "INKUBOWAŁ: DialCom24 pełnił rolę inkubatora, z którego aktywa (marka Przelewy24, umowy) zostały przeniesione do PayPro SA.",
+    "to": "PayPro SA",
+    "width": 1
+  },
+  {
+    "from": "DialCom24 Sp. z o.o.",
+    "label": "POSIADA_SYGNATURĘ",
+    "title": "POSIADA_SYGNATURĘ: Numer KRS przypisany do spółki DialCom24 Sp. z o.o.",
+    "to": "KRS 0000306513",
+    "width": 1
+  },
+  {
+    "from": "PayPro SA",
+    "label": "POSIADA_SYGNATURĘ",
+    "title": "POSIADA_SYGNATURĘ: Numer KRS przypisany do spółki PayPro SA.",
+    "to": "KRS 0000347935",
+    "width": 1
+  },
+  {
+    "from": "Nets Denmark A/S",
+    "label": "POSIADA_WIĘKSZOŚĆ",
+    "title": "POSIADA_WIĘKSZOŚĆ: Nets Denmark A/S posiada 51% udziałów w holdingu P24 Dotcard Sp. z o.o.",
+    "to": "P24 Dotcard Sp. z o.o.",
+    "width": 1
+  },
+  {
+    "from": "P24 Dotcard Sp. z o.o.",
+    "label": "KONTROLUJE",
+    "title": "KONTROLUJE: P24 Dotcard Sp. z o.o. kontroluje PayPro, Dotpay i eCard.",
+    "to": "PayPro SA",
+    "width": 1
+  },
+  {
+    "from": "P24 Dotcard Sp. z o.o.",
+    "label": "POSIADA_SYGNATURĘ",
+    "title": "POSIADA_SYGNATURĘ: Numer KRS przypisany do spółki P24 Dotcard Sp. z o.o.",
+    "to": "KRS 0000629532",
+    "width": 1
+  },
+  {
+    "from": "Michał Bochowicz",
+    "label": "PRACUJE_DLA",
+    "title": "PRACUJE_DLA: Mecenas Michał Bochowicz jest prawnikiem w kancelarii Gessel.",
+    "to": "Kancelaria Gessel",
+    "width": 1
+  },
+  {
+    "from": "Michał Bochowicz",
+    "label": "DORADZAŁ_PRAWNIE",
+    "title": "DORADZAŁ_PRAWNIE: Michał Bochowicz był architektem prawnym transakcji z Nets oraz inwestycji w Saule Technologies.",
+    "to": "Piotr Marcin Kurczewski",
+    "width": 1
+  },
+  {
+    "from": "DC24 Alternatywna Spółka Inwestycyjna Sp. z o.o.",
+    "label": "PRZEJĄŁ_KONTROLĘ",
+    "title": "PRZEJĄŁ_KONTROLĘ: DC24 ASI przejęło kontrolę nad Saule Technologies poprzez realizację zabezpieczeń na akcjach.",
+    "to": "Saule Technologies",
+    "width": 1
+  },
+  {
+    "from": "DC24 Alternatywna Spółka Inwestycyjna Sp. z o.o.",
+    "label": "PRZEJĄŁ_AKCJE_OD",
+    "title": "PRZEJĄŁ_AKCJE_OD: DC24 ASI przystąpiło do egzekucji zabezpieczeń na akcjach należących do Olgi Malinkiewicz.",
+    "to": "Olga Malinkiewicz",
+    "width": 1
+  },
+  {
+    "from": "DC24 Alternatywna Spółka Inwestycyjna Sp. z o.o.",
+    "label": "INWESTUJE_W",
+    "title": "INWESTUJE_W: DC24 ASI posiada pakiet ~20% akcji Columbus Energy SA.",
+    "to": "Columbus Energy SA",
+    "width": 1
+  },
+  {
+    "from": "DC24 Alternatywna Spółka Inwestycyjna Sp. z o.o.",
+    "label": "POSIADA_SYGNATURĘ",
+    "title": "POSIADA_SYGNATURĘ: Numer KRS przypisany do DC24 ASI.",
+    "to": "KRS 0000897201",
+    "width": 1
+  },
+  {
+    "from": "Arkadiusz Krzemiński",
+    "label": "CZŁONEK_RADY_NADZORCZEJ",
+    "title": "CZŁONEK_RADY_NADZORCZEJ: Arkadiusz Krzemiński zasiada w radzie nadzorczej PayPo jako zaufany człowiek Kurczewskiego.",
+    "to": "PayPo Sp. z o.o.",
+    "width": 1
+  },
+  {
+    "from": "Arkadiusz Krzemiński",
+    "label": "CZŁONEK_RADY_NADZORCZEJ",
+    "title": "CZŁONEK_RADY_NADZORCZEJ: Arkadiusz Krzemiński nadzoruje finanse Currency One z ramienia inwestora.",
+    "to": "Currency One SA",
+    "width": 1
+  },
+  {
+    "from": "Arkadiusz Krzemiński",
+    "label": "CZŁONEK_RADY_NADZORCZEJ",
+    "title": "CZŁONEK_RADY_NADZORCZEJ: Arkadiusz Krzemiński jest członkiem Rady Nadzorczej w Saule Technologies.",
+    "to": "Saule Technologies",
+    "width": 1
+  },
+  {
+    "from": "Anna Szymańska-Piper",
+    "label": "ZARZĄDZA",
+    "title": "ZARZĄDZA: Anna Szymańska-Piper jest Prezesem Zarządu ADM 14 Sp. z o.o.",
+    "to": "ADM 14 Sp. z o.o.",
+    "width": 1
+  },
+  {
+    "from": "Anna Szymańska-Piper",
+    "label": "CZŁONEK_RADY_NADZORCZEJ",
+    "title": "CZŁONEK_RADY_NADZORCZEJ: Anna Szymańska-Piper jest Członkiem Rady Nadzorczej Saule Technologies.",
+    "to": "Saule Technologies",
+    "width": 1
+  },
+  {
+    "from": "Anna Szymańska-Piper",
+    "label": "ZARZĄDZA",
+    "title": "ZARZĄDZA: Anna Szymańska-Piper jest Prezesem Zarządu ADM14 Sp. z o.o., obsługującej grupę DC24.",
+    "to": "ADM14 Sp. z o.o.",
+    "width": 1
+  },
+  {
+    "from": "Olga Malinkiewicz",
+    "label": "ZAŁOŻYŁA",
+    "title": "ZAŁOŻYŁA: Olga Malinkiewicz jest twórczynią technologii perowskitowej i założycielką Saule Technologies.",
+    "to": "Saule Technologies",
+    "width": 1
+  },
+  {
+    "from": "Olga Malinkiewicz",
+    "label": "JEST_W_SPORZE_Z",
+    "title": "JEST_W_SPORZE_Z: Olga Malinkiewicz oskarża Kurczewskiego o celowe zadłużanie spółki i wrogie przejęcie.",
+    "to": "Piotr Marcin Kurczewski",
+    "width": 1
+  },
+  {
+    "from": "\"Marmur\" Sławniowice Sp. z o.o.",
+    "label": "POSIADA_SYGNATURĘ",
+    "title": "POSIADA_SYGNATURĘ: Numer KRS przypisany do spółki \"Marmur\" Sławniowice.",
+    "to": "KRS 0000247754",
+    "width": 1
+  },
+  {
+    "from": "Paradise Papers",
+    "label": "UJAWNIA",
+    "title": "UJAWNIA: Raport Paradise Papers ujawnił istnienie struktur optymalizacyjnych Kurczewskiego na Malcie.",
+    "to": "Cheshire Malta Ltd",
+    "width": 1
+  },
+  {
+    "from": "QR Sp. z o.o.",
+    "label": "POWIĄZANA_Z",
+    "title": "POWIĄZANA_Z: Polska spółka QR Sp. z o.o. jest lustrzanym odbiciem maltańskiej QR Limited.",
+    "to": "QR Limited",
+    "width": 1
   }
-};
+]);
 
                   
 
