@@ -180,6 +180,13 @@
   margin-right: auto;    /* Centruje przycisk */
 }
 
+/* Klasa zwężająca przycisk i centrująca go */
+.w-560 {
+  width: 560px !important; /* Nadpisuje 100% */
+  margin-left: auto;     /* Centruje przycisk */
+  margin-right: auto;    /* Centruje przycisk */
+}
+
 .link {
   color: #169dd5; /* Twój naturalny kolor */
   text-decoration: none; /* Opcjonalnie - usuwa podkreślenie */
