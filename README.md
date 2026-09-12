@@ -14,7 +14,7 @@
 
 <div align="center">  
 
-  <img src="https://raw.githubusercontent.com/LukeStriderGM/LukeStriderGM/main/Gemini_Generated_Image_r80sijr80sijr80s.png" width="" height=""/>
+  <img src="6a0d83ae-3402-42cb-a911-9173b6cb04b8.jpeg" width="" height=""/>
   
 </div>
 
