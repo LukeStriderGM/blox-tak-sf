@@ -3,10 +3,8 @@
 <div align="center"> 
   
   ###  BLOX-TAK Solutions Forge
-
-  #### Emergency Page Template
   
-  #### https://blox-tak-sf.tech
+  #### [BLOX-TAK-SF](https://lukestridergm.github.io/blox-tak-sf)
 
 </div>
 
